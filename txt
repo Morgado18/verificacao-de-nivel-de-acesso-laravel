@@ -1,0 +1,27 @@
+
+1º Criar uma Middleware, exemplo: gestor:
+  php artisan make:middleware CheckGestor
+
+2º Configuar o Middleware que nós criamos:
+  Fazer a validação na função handle
+  if(Auth::check() && Auth::user()->id_nivel_acesso == 2) { // verifica se existe user autenticando e verifica o id_nivel_acesso na base de dados se for 2(o id do gestor) vai prosseguir...
+    return $next($request);
+  }
+  return redirect('/'); // Se nao, ele barra e retorna para uma rota
+
+3º No Kenrenl.php, vamos importar o nosso Middleware:
+  Protected $routeMiddleware = [
+    'gestor' => \App\Middleware\CheckGestor::class, // demos um nome ao nosso middleware que será utilizado nas rotas
+  ];
+
+4º No arquivo de rotas, em uso vamos validar quem pode e quem não pode acessar uma determianda route:
+  Route::group([
+    'middleware' => ['auth', 'gestor'] // definimos, quem pode acessar est route deve está autenticado e deve ter o nível de acesso do gestor
+  ], function(){
+    Route::get('dashboard', function(){
+      return view('gestor.dashboard');
+    })
+  });
+
+// Isso era para ontem...
+// morgado_andrade @ O lobo solitário
