@@ -3,7 +3,7 @@
   php artisan make:middleware CheckGestor
 
 2º Configuar o Middleware que nós criamos e importamos:
-  no início:
+  no início do arquivo App\Http\Middlewares\CheckGestor:
   use Auth;
   Fazer a validação na função handle
   if(Auth::check() && Auth::user()->id_nivel_acesso == 2) { // verifica se existe user autenticando e verifica o id_nivel_acesso na base de dados se for 2(o id do gestor) vai prosseguir...
