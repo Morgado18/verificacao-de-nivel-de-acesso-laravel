@@ -2,7 +2,9 @@
 1º Criar uma Middleware, exemplo: gestor:
   php artisan make:middleware CheckGestor
 
-2º Configuar o Middleware que nós criamos:
+2º Configuar o Middleware que nós criamos e importamos:
+  no início:
+  use Auth;
   Fazer a validação na função handle
   if(Auth::check() && Auth::user()->id_nivel_acesso == 2) { // verifica se existe user autenticando e verifica o id_nivel_acesso na base de dados se for 2(o id do gestor) vai prosseguir...
     return $next($request);
@@ -15,7 +17,8 @@
   ];
 
 4º No Controller de Login:
-  Adicionar a function:
+  Adicionar a function e importar:
+      use Illuminate\Http\Request;
       protected function authenticated(Request $request, $user){
         switch($user->id_nivel_acesso){
             case 1:
