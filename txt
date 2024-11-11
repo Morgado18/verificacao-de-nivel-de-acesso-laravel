@@ -14,6 +14,21 @@
     'gestor' => \App\Middleware\CheckGestor::class, // demos um nome ao nosso middleware que será utilizado nas rotas
   ];
 
+4º No Controller de Login:
+  Adicionar a function:
+      protected function authenticated(Request $request, $user){
+        switch($user->id_nivel_acesso){
+            case 1:
+               return redirect()->intended('admin/dash'); // exemplo
+            case 2:
+                return redirect()->intended('gestor/dash'); // em uso
+            case 3:
+                return redirect()->intended('agente/dash'); // exemplo
+            case 4:
+                return redirect()->intended('user/dash'); // exemplo
+        }
+    }
+
 4º No arquivo de rotas, em uso vamos validar quem pode e quem não pode acessar uma determianda route:
   Route::group([
     'middleware' => ['auth', 'gestor'] // definimos, quem pode acessar est route deve está autenticado e deve ter o nível de acesso do gestor
