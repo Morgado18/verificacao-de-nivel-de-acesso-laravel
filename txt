@@ -11,7 +11,7 @@
   }
   return redirect('/'); // Se nao, ele barra e retorna para uma rota
 
-3º No Kernel.php, vamos importar o nosso Middleware:
+3º No App\Http\Kernel.php, vamos importar o nosso Middleware:
   Protected $routeMiddleware = [
     'gestor' => \App\Middleware\CheckGestor::class, // daremos um nome ao nosso middleware que será utilizado nas rotas
   ];
