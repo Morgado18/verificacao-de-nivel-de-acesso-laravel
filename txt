@@ -13,7 +13,7 @@
 
 3º No App\Http\Kernel.php, vamos importar o nosso Middleware:
   Protected $routeMiddleware = [
-    'gestor' => \App\Middleware\CheckGestor::class, // daremos um nome ao nosso middleware que será utilizado nas rotas
+    'gestor' => \App\Http\Middleware\CheckGestor::class, // daremos um nome ao nosso middleware que será utilizado nas rotas
   ];
 
 4º No Controller de Login:
